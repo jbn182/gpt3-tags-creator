@@ -6,14 +6,12 @@
     <br />
     <textarea
       v-model="text"
-      name=""
-      id=""
       cols="30"
       rows="10"
       placeholder="give me tags for a funny youtube video"
     ></textarea>
     <br />
-    <button @click="gpt3">Generate</button>
+    <button @click="gpt3()">Generate</button>
     <br>
     <h2>Results:</h2>
     <h5>{{ results }}</h5>
@@ -27,7 +25,6 @@ export default {
       results: "",
     };
   },
-  mounted() {},
   methods: {
     gpt3() {
       fetch("/api/gpt3", {
@@ -41,7 +38,6 @@ export default {
       })
         .then((response) => response.json())
         .then((textBACK) => {
-          console.log(textBACK)
           this.results = textBACK.result;
         });
     },

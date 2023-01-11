@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export default async function (event) {
+export default defineEventHandler( async (event) => {
     const { textGPT } = await readBody(event);
 
     const completion = await openai.createCompletion({
@@ -18,7 +18,7 @@ export default async function (event) {
     return {
         result: completion.data.choices[0].text,
       }
-}
+})
 
 function generatePrompt(textGPT) {
     return `Please provide a list of keywords that you would like to use as tags for your YouTube video separated by coma.
